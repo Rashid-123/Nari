@@ -1,5 +1,6 @@
 const validate = (schema) => async (req, res, next) => {
   try {
+    console.log("in validator");
     const parseBody = await schema.parseAsync(req.body);
     req.body = parseBody;
     return next();

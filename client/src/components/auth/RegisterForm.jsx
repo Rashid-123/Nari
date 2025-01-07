@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../store/auth';
-import BottomWarning from './BottomWarning';
-const backendUrl = import.meta.env.VITE_BACKEND_URL
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../store/auth";
+import BottomWarning from "./BottomWarning";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    userName: '',
+    email: "",
+    password: "",
+    userName: "",
   });
 
   const navigate = useNavigate();
@@ -21,49 +21,52 @@ function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data Submitted:', formData);
+    console.log("Form Data Submitted:", formData);
 
     try {
       const response = await fetch(`${backendUrl}/api/auth/register`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
+      console.log(response);
 
-      if (response.ok)
-      { 
+      if (response.ok) {
         const res_data = await response.json();
-        console.log("response from server : ", res_data); 
+        console.log("response from server : ", res_data);
 
         storeTokenInLS(res_data.token);
         // localStorage.setItem('token', res_data.token);
 
-
         setFormData({
-          email: '',
-          password: '',
-          userName: '',
+          email: "",
+          password: "",
+          userName: "",
         });
 
         navigate("/");
       }
 
       // const data = await response.json();
-      console.log('Registration successful:', response);
+      console.log("Registration successful:", response);
     } catch (error) {
-      console.error('Error registering:', error);
+      console.error("Error registering:", error);
     }
   };
 
   return (
     <div className="bg-gray-800 p-8 mt-60 sm:mt-100 lg:mt-8  rounded-lg shadow-lg w-full max-w-2xl -z-0">
-      <h2 className="text-4xl font-extrabold text-white mb-6 text-center">Register</h2>
+      <h2 className="text-4xl font-extrabold text-white mb-6 text-center">
+        Register
+      </h2>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-purple-300 mb-2">Email</label>
+          <label className="block text-sm font-medium text-purple-300 mb-2">
+            Email
+          </label>
           <input
             type="email"
             name="email"
@@ -75,7 +78,9 @@ function RegisterForm() {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-sm font-medium text-purple-300 mb-2">Password</label>
+          <label className="block text-sm font-medium text-purple-300 mb-2">
+            Password
+          </label>
           <input
             type="password"
             name="password"
@@ -87,7 +92,9 @@ function RegisterForm() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-purple-300 mb-2">Username</label>
+          <label className="block text-sm font-medium text-purple-300 mb-2">
+            Username
+          </label>
           <input
             type="text"
             name="userName"
@@ -105,13 +112,13 @@ function RegisterForm() {
           Register
         </button>
 
-
-        <BottomWarning to={"/login"} label={"Already have an account?"} ButtonText={"Login"} />
-
-
+        <BottomWarning
+          to={"/login"}
+          label={"Already have an account?"}
+          ButtonText={"Login"}
+        />
       </form>
     </div>
-
   );
 }
 

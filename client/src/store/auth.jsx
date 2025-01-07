@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   let isLoggedIn = !!token;
-
+  console.log(isLoggedIn);
   const userAuthentication = async () => {
     try {
       const response = await fetch(`${backendUrl}/api/auth/getUser`, {
@@ -30,14 +30,12 @@ export const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       if (!response.ok) {
         console.error(`Error: ${response.status} - ${response.statusText}`);
         const errorText = await response.text();
         console.error("Response received:", errorText);
         return;
       }
-
       if (response.ok) {
         const data = await response.json();
         // console.log("data from userAuthentication : ", data.userData);

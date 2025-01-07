@@ -27,10 +27,12 @@ const contactRouters = require("./routes/contactRouters");
 const adminRouter = require("./routes/adminRouters");
 
 //use Routers
+app.use("/api/auth", authRouter);
+
 app.use("/api", authMiddleware);
 app.use("/api/incidents", incidentRouter);
 app.use("/api/users", userRouter);
-app.use("/api/auth", authRouter);
+// app.use("/api/auth", authRouter);
 app.use("/api/contact", contactRouters);
 
 app.use("/api/admin", adminRouter);
