@@ -6,10 +6,10 @@ const db = require("./db conn/connection");
 const authMiddleware = require("./middlewares/authMiddleware");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: process.env.FRONTEND_URL || "http://localhost:80", // Use environment variable
   methods: "GET, POST, PUT, DELETE, PATCH",
   credentials: true,
 };
@@ -18,7 +18,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-//import routers
+// Import routers
 const incidentRouter = require("./routes/incidentRouters");
 const userRouter = require("./routes/userRouters");
 const authRouter = require("./routes/authRouters");
@@ -26,15 +26,13 @@ const errorMiddleware = require("./middlewares/errorMiddleware");
 const contactRouters = require("./routes/contactRouters");
 const adminRouter = require("./routes/adminRouters");
 
-//use Routers
+// Use routers
 app.use("/api/auth", authRouter);
 
 app.use("/api", authMiddleware);
 app.use("/api/incidents", incidentRouter);
 app.use("/api/users", userRouter);
-// app.use("/api/auth", authRouter);
 app.use("/api/contact", contactRouters);
-
 app.use("/api/admin", adminRouter);
 
 app.get("/hello", (req, res) => {
@@ -46,6 +44,7 @@ app.post("/hello", (req, res) => {
 });
 
 app.use(errorMiddleware);
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
