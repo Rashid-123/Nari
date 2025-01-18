@@ -1,22 +1,30 @@
-# Stage 1: Build the application using Vite
-FROM node:18 AS builder
+# Build stage
+FROM node:18-alpine AS build
 WORKDIR /app
+
+# Copy package files and install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
+
+# Copy the rest of the application code
 COPY . .
-RUN npm run build  # This will generate the "dist" directory
 
-# Stage 2: Serve the built application using Nginx
-FROM nginx:alpine
+# Debug: List contents of /app
+RUN ls -la /app
 
-# Ensure the target directory exists in the nginx container
-RUN mkdir -p /usr/share/nginx/html
+# Build the app using Vite
+RUN npm run build
 
-# Copy the dist directory to the Nginx html folder
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Debug: Verify the dist directory exists
+RUN ls -la /app/dist
 
-# Expose port 80 to access the app
+# Production stage
+FROM nginx:stable-alpine
+WORKDIR /usr/share/nginx/html
+
+# Copy the build output from the build stage
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Expose the default Nginx port
 EXPOSE 80
-
-# Start nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
