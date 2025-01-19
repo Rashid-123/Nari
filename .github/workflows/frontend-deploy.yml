@@ -1,10 +1,9 @@
-name: Deploy Backend
+name: Deploy Frontend
 
 on:
   push:
     paths:
-      - "server/**"
-      - ".github/workflows/backend-deploy.yml"
+      - "client/**" # Trigger on changes in the client folder
 
 jobs:
   deploy:
@@ -18,10 +17,10 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nari-backend:latest ./server
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nari-frontend:latest ./client
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/nari-backend:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/nari-frontend:latest
 
       - name: Trigger Render Deploy
-        run: curl -X POST -d '{}' ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+        run: curl -X POST -d '{}' ${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}
