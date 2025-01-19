@@ -17,7 +17,7 @@ const corsOptions = {
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
-
+console.log("ckecking for workflow");
 // Import routers
 const incidentRouter = require("./routes/incidentRouters");
 const userRouter = require("./routes/userRouters");
