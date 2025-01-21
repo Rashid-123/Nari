@@ -16,11 +16,10 @@ jobs:
       - name: Determine Image Tag
         id: tag
         run: |
-          TAG=${{ github.ref_name }}  # Default to the branch or tag name
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
             TAG=${{ github.ref_name }}  # Use tag name if it's a tag push
           elif [[ "${{ github.ref }}" == refs/heads/* ]]; then
-            TAG=${{ github.sha::7 }}  # Use short commit hash for branches
+            TAG=$(echo "${{ github.sha }}" | cut -c1-7)  # Use short commit hash for branches
           else
             TAG="latest"  # Fallback to latest
           fi
