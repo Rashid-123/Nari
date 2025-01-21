@@ -1,10 +1,10 @@
-name: Deploy Backend
+name: Deploy Frontend
 
 on:
   push:
     paths:
-      - "server/**" # Trigger on changes in the server folder
-      - ".github/workflows/backend-deploy.yml" # Trigger on changes to this workflow file
+      - "client/**" # Trigger on changes in the client folder
+      - ".github/workflows/frontend-deploy.yml" # Trigger on changes to this workflow file
 
 jobs:
   deploy:
@@ -31,10 +31,10 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/nari-backend:${{ env.IMAGE_TAG }} -t ${{ secrets.DOCKER_USERNAME }}/nari-backend:latest ./server
-          docker push ${{ secrets.DOCKER_USERNAME }}/nari-backend:${{ env.IMAGE_TAG }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/nari-backend:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/nari-frontend:${{ env.IMAGE_TAG }} -t ${{ secrets.DOCKER_USERNAME }}/nari-frontend:latest ./client
+          docker push ${{ secrets.DOCKER_USERNAME }}/nari-frontend:${{ env.IMAGE_TAG }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/nari-frontend:latest
 
       - name: Trigger Render Deploy
         run: |
-          curl -X POST -d '{}' ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+          curl -X POST -d '{}' ${{ secrets.RENDER_DEPLOY_HOOK_FRONTEND }}
