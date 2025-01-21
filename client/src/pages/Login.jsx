@@ -12,9 +12,7 @@ function Login() {
         />
       </div>
       <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8">
-        <h1>Added the tag</h1>
-        <h1>Added a new tag</h1>
-        <h1>added a new tag again and again </h1>
+        <h1>final check</h1>
         <LoginForm className="w-full max-w-md" />
       </div>
     </div>
