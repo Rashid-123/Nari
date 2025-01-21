@@ -13,14 +13,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Determine Image Tag
+        id: tag
+        run: |
+          TAG=${{ github.ref_name }}  # Default to the branch or tag name
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            TAG=${{ github.ref_name }}  # Use tag name if it's a tag push
+          elif [[ "${{ github.ref }}" == refs/heads/* ]]; then
+            TAG=${{ github.sha::7 }}  # Use short commit hash for branches
+          else
+            TAG="latest"  # Fallback to latest
+          fi
+          echo "IMAGE_TAG=$TAG" >> $GITHUB_ENV
+
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nari-backend:latest ./server
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nari-backend:${{ env.IMAGE_TAG }} ./server
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/nari-backend:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/nari-backend:${{ env.IMAGE_TAG }}
 
       - name: Trigger Render Deploy
-        run: curl -X POST -d '{}' ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+        run: |
+          curl -X POST -d '{}' ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
