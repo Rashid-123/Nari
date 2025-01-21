@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "client/**" # Trigger on changes in the client folder
+      - ".github/workflows/frontend-deploy.yml" # Trigger on changes to this workflow file
 
 jobs:
   deploy:

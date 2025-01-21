@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "server/**" # Trigger on changes in the server folder
-
+      - ".github/workflows/backend-deploy.yml" # Trigger on changes to this workflow file
 jobs:
   deploy:
     runs-on: ubuntu-latest
