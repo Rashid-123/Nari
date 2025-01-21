@@ -18,6 +18,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 console.log("added the tag");
+console.log("added a new tag");
 // Import routers
 const incidentRouter = require("./routes/incidentRouters");
 const userRouter = require("./routes/userRouters");
