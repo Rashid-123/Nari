@@ -12,7 +12,6 @@ function Login() {
         />
       </div>
       <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8">
-        <h1>final check</h1>
         <LoginForm className="w-full max-w-md" />
       </div>
     </div>

@@ -120,7 +120,6 @@ function LoginForm() {
 
   return (
     <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md -z-0">
-      <h1>check workflow</h1>
       <h2 className="text-4xl font-extrabold text-white mb-6 text-center">
         Login
       </h2>
