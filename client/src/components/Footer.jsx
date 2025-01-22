@@ -12,22 +12,10 @@ function Footer() {
     <footer className="bg-gray-900 text-white py-8">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between">
         <div className="mb-6 md:mb-0">
-          <h4 className="text-xl font-bold text-purple-300">Stree</h4>
+          <h4 className="text-xl font-bold text-purple-300">Nari</h4>
           <p className="mt-2 text-sm">
             For our fierce warriors and their never diminishing light
           </p>
-        </div>
-
-        <div className="mb-6 md:mb-0">
-          <h4 className="text-xl font-bold text-purple-300">ABOUT US</h4>
-          <ul className="mt-2 space-y-2 text-sm">
-            {/* <li><Link to="/about-team" className="hover:text-purple-400">About team</Link></li> */}
-            <li>
-              <Link to="/contact-us" className="hover:text-purple-400">
-                Contact us
-              </Link>
-            </li>
-          </ul>
         </div>
 
         <div>
@@ -35,7 +23,7 @@ function Footer() {
           <ul className="mt-2 space-y-2 text-sm">
             <li>
               <a
-                href="https://github.com"
+                href="https://github.com/Rashid-123/Nari"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-purple-400"
@@ -45,7 +33,7 @@ function Footer() {
             </li>
             <li>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/shadan-rashid/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-purple-400"
@@ -53,19 +41,10 @@ function Footer() {
                 Linkedin
               </a>
             </li>
+
             <li>
               <a
-                href="https://discord.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-purple-400"
-              >
-                Discord
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/rashid._29/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-purple-400"
@@ -80,35 +59,28 @@ function Footer() {
         <p className="text-sm">© Copyright 2024</p>
         <div className="flex space-x-4 text-white">
           <a
-            href="https://discord.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaDiscord className="hover:text-gray-400 cursor-pointer" />
-          </a>
-          <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/rashid._29/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaInstagram className="hover:text-gray-400 cursor-pointer" />
           </a>
           <a
-            href="https://twitter.com"
+            href="https://x.com/Rashid1505"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaTwitter className="hover:text-gray-400 cursor-pointer" />
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/Rashid-123/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaGithub className="hover:text-gray-400 cursor-pointer" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/shadan-rashid/"
             target="_blank"
             rel="noopener noreferrer"
           >

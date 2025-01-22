@@ -147,19 +147,23 @@ const Map = () => {
     dateRange: null,
     category: "",
   });
-  const [userLocation, setUserLocation] = useState([29.95488, 76.819534]); // Default location
+  const [userLocation, setUserLocation] = useState(null); // Start as null
+  const [loadingLocation, setLoadingLocation] = useState(true); // Add loading state
   const { token } = useAuth();
   const [myToken, setMyToken] = useState(token);
 
   useEffect(() => {
-    // Get user's current location
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         setUserLocation([latitude, longitude]);
+        setLoadingLocation(false);
       },
       (error) => {
         console.error("Error getting user's location:", error);
+        // Fallback to default location
+        setUserLocation([29.95488, 76.819534]);
+        setLoadingLocation(false);
       }
     );
 
@@ -195,6 +199,10 @@ const Map = () => {
 
     return matchesCategory && matchesDateRange;
   });
+
+  if (loadingLocation) {
+    return <div className="text-center mt-10">Loading your location...</div>;
+  }
 
   return (
     <div className="flex flex-col h-[90vh] pt-[60px] pb-[30px] relative z-10">
