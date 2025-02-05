@@ -12,12 +12,11 @@ authRouter.post(
   validate(authSchemas.loginSchema),
   authController.login
 );
-authRouter.post("/register", authController.register);
-authRouter.get(
-  "/getUser",
+authRouter.post(
+  "/register",
   validate(authSchemas.registerSchema),
-  authMiddleware,
-  authController.getUser
+  authController.register
 );
+authRouter.get("/getUser", authMiddleware, authController.getUser);
 
 module.exports = authRouter;

@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
+
   const [user, setUser] = useState("");
   // const [incidents, setIncidents] = useState([]);
 
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   const LogoutUser = () => {
     setToken("");
+    setUser("");
     localStorage.removeItem("token");
   };
 
@@ -38,7 +40,8 @@ export const AuthProvider = ({ children }) => {
       }
       if (response.ok) {
         const data = await response.json();
-        // console.log("data from userAuthentication : ", data.userData);
+        console.log("data from userAuthentication : ", data.userData);
+        console.log(data.userData);
         setUser(data.userData);
       }
     } catch (error) {

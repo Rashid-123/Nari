@@ -41,9 +41,7 @@ function Header() {
               >
                 Helpline
               </Link>
-              {/* <Link to="/forum" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                Forum
-              </Link> */}
+
               <Link
                 to="/incident-form"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -56,21 +54,23 @@ function Header() {
               >
                 Map
               </Link>
-              <Link
-                to="/user-profile"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >
-                User Profile
-              </Link>
 
               {isLoggedIn ? (
-                <Link
-                  to="/login"
-                  onClick={LogoutUser}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Logout
-                </Link>
+                <>
+                  <Link
+                    to="/user-profile"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    User Profile
+                  </Link>
+                  <Link
+                    to="/login"
+                    onClick={LogoutUser}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Logout
+                  </Link>
+                </>
               ) : (
                 <>
                   <Link
@@ -87,9 +87,6 @@ function Header() {
                   </Link>
                 </>
               )}
-              {/* <Link to="/about-us" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                About us
-              </Link> */}
             </div>
             <div className="md:hidden">
               <button
@@ -111,25 +108,13 @@ function Header() {
       </div>
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden bg-gray-800 max-h-64 overflow-y-auto ">
+        <div className="md:hidden bg-gray-800 max-h-64 overflow-y-auto">
           <div className="px-2 pt-2 pb-3 sm:pb-20 space-y-1 sm:px-3">
             <Link
               to="/"
               className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
             >
               Home
-            </Link>
-            <Link
-              to="/register"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            >
-              Register
-            </Link>
-            <Link
-              to="/login"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            >
-              Login
             </Link>
             <Link
               to="/resources"
@@ -144,12 +129,6 @@ function Header() {
               Helpline
             </Link>
             <Link
-              to="/forum"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            >
-              Forum
-            </Link>
-            <Link
               to="/incident-form"
               className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
             >
@@ -161,30 +140,40 @@ function Header() {
             >
               Map
             </Link>
-            <Link
-              to="/incident-form"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            >
-              Report Incident
-            </Link>
-            <Link
-              to="/map"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            >
-              Map
-            </Link>
-            <Link
-              to="/about-us"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            >
-              About us
-            </Link>
-            <Link
-              to="/contact-us"
-              className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
-            >
-              Contact us
-            </Link>
+
+            {/* Show Profile & Logout when user is logged in */}
+            {isLoggedIn ? (
+              <>
+                <Link
+                  to="/user-profile"
+                  className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={LogoutUser}
+                  className="block w-full text-left text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Show Register & Login when user is NOT logged in */}
+                <Link
+                  to="/register"
+                  className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Register
+                </Link>
+                <Link
+                  to="/login"
+                  className="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Login
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

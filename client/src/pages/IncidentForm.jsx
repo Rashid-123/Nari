@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -21,7 +21,7 @@ const IncidentForm = () => {
     if (user) {
       setName(user.userName);
     }
-  }, [user]);
+  }, []);
 
   const detectLocation = () => {
     navigator.geolocation.getCurrentPosition(
