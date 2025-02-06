@@ -8,13 +8,23 @@ const authMiddleware = require("./middlewares/authMiddleware");
 const app = express();
 const port = process.env.PORT || 5000;
 
+// const corsOptions = {
+//   origin: process.env.FRONTEND_URL || "http://localhost:5173", // Use environment variable
+//   methods: "GET, POST, PUT, DELETE, PATCH",
+//   credentials: true,
+// };
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:5173", // Use environment variable
-  methods: "GET, POST, PUT, DELETE, PATCH",
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+  preflightContinue: false, // Ensure preflight responses are handled
+  optionsSuccessStatus: 204, // Use 204 for successful OPTIONS requests
 };
 
 // Middleware
+app.options("*", cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(express.json());
 
