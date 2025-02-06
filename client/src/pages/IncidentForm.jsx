@@ -28,6 +28,7 @@ const IncidentForm = () => {
       (position) => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
+        console.log(position);
       },
       (error) => {
         console.error("Error detecting location:", error);

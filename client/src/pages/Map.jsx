@@ -233,13 +233,6 @@ const safePlaceIcon = new L.Icon({
   popupAnchor: [0, -30],
 });
 
-// const incidentIcon = new L.Icon({
-//   iconUrl: "https://cdn-icons-png.flaticon.com/512/616/616489.png",
-//   iconSize: [30, 30],
-//   iconAnchor: [15, 30],
-//   popupAnchor: [0, -30],
-// });
-
 const Map = () => {
   const [incidents, setIncidents] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
@@ -257,10 +250,14 @@ const Map = () => {
       (position) => {
         setUserLocation([position.coords.latitude, position.coords.longitude]);
         fetchSafePlaces(position.coords.latitude, position.coords.longitude);
+        // setUserLocation(25.5940947, 85.1375645); // Default location
+        // fetchSafePlaces(25.5940947, 85.1375645); // Default location
+        console.log(position);
       },
+
       (error) => {
         console.error("Error getting location:", error);
-        setUserLocation([25.5940947, 85.1375645]); // Default location
+        setUserLocation([25.562596, 84.672492]); // Default location
       }
     );
 
@@ -288,7 +285,7 @@ const Map = () => {
     const query = `[out:json];
       (
         node["amenity"="hospital"](around:5000, ${lat}, ${lon});
-        node["amenity"="school"](around:5000, ${lat}, ${lon});
+        node["amenity"="school"](around:50000, ${lat}, ${lon});
         node["amenity"="police"](around:5000, ${lat}, ${lon});
       );
       out;`;
@@ -306,6 +303,7 @@ const Map = () => {
           lon: el.lon,
         }));
       setSafePlaces(places);
+      console.log(places);
     } catch (error) {
       console.error("Error fetching safe places:", error);
     }
