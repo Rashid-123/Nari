@@ -4,7 +4,19 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useAuth } from "../store/auth";
 import { MdMyLocation } from "react-icons/md";
+//
+import L from "leaflet";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import markerShadowPng from "leaflet/dist/images/marker-shadow.png";
 
+const customMarker = new L.Icon({
+  iconUrl: markerIconPng,
+  shadowUrl: markerShadowPng,
+  iconSize: [25, 41], // Default size of Leaflet markers
+  iconAnchor: [12, 41], // Positioning of the icon
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const IncidentForm = () => {
@@ -234,7 +246,10 @@ const IncidentForm = () => {
               attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
             />
             <MapClickHandler />
-            <Marker position={[latitude, longitude]}></Marker>
+            <Marker
+              position={[latitude, longitude]}
+              icon={customMarker}
+            ></Marker>
           </MapContainer>
         ) : (
           <div
