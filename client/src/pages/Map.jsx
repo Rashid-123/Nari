@@ -7,7 +7,7 @@ import "leaflet-routing-machine";
 import { useAuth } from "../store/auth";
 import black_icon from "../assets/current_location.png";
 import blue_icon from "../assets/safe.png";
-import red_icon from "../assets/insident.png";
+import red_icon from "../assets/Insident.png";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 // Custom Icons
