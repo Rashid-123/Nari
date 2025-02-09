@@ -12,8 +12,8 @@ import markerShadowPng from "leaflet/dist/images/marker-shadow.png";
 const customMarker = new L.Icon({
   iconUrl: markerIconPng,
   shadowUrl: markerShadowPng,
-  iconSize: [25, 41], // Default size of Leaflet markers
-  iconAnchor: [12, 41], // Positioning of the icon
+  iconSize: [25, 41], 
+  iconAnchor: [12, 41], 
   popupAnchor: [1, -34],
   shadowSize: [41, 41],
 });
