@@ -1,6 +1,14 @@
 const User = require("../models/userSchema");
 const bcrypt = require("bcryptjs");
 
+//------------------ OTP VERIFICATION ---------------
+
+const send_otp = async (req, res) => {
+  try {
+    const { emergency_contact } = req.body;
+  } catch (error) {}
+};
+
 const login = async (req, res) => {
   try {
     const { userName, password } = req.body;

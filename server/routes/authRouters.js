@@ -6,6 +6,8 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const loginvalidation = require("../middlewares/loginValidation");
 const authRouter = express.Router();
 
+authRouter.post("/send_otp", authController.send_otp);
+
 authRouter.post(
   "/login",
   loginvalidation,

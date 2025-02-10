@@ -133,10 +133,9 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
-    email: "",
+    emergency_contact: "",
     password: "",
     userName: "",
-    emergency_contact: "",
   });
 
   const [otp, setOtp] = useState(""); // OTP input state
@@ -154,8 +153,8 @@ function RegisterForm() {
   };
 
   const handleSendOtp = async () => {
-    if (!formData.email) {
-      setError("Please enter your email first.");
+    if (!formData.emergency_contact) {
+      setError("Please enter your phone number first.");
       return;
     }
     setLoading(true);
@@ -164,7 +163,7 @@ function RegisterForm() {
       const response = await fetch(`${backendUrl}/api/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email }),
+        body: JSON.stringify({ emergency_contact: formData.emergency_contact }),
       });
 
       const resData = await response.json();
@@ -185,7 +184,10 @@ function RegisterForm() {
       const response = await fetch(`${backendUrl}/api/auth/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email, otp }),
+        body: JSON.stringify({
+          emergency_contact: formData.emergency_contact,
+          otp,
+        }),
       });
 
       const resData = await response.json();
@@ -217,10 +219,9 @@ function RegisterForm() {
         storeTokenInLS(resData.token);
 
         setFormData({
-          email: "",
+          emergency_contact: "",
           password: "",
           userName: "",
-          emergency_contact: "",
         });
 
         navigate("/");
@@ -243,16 +244,16 @@ function RegisterForm() {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-purple-300 mb-2">
-            Email
+            Emergency Contact
           </label>
           <div className="flex">
             <input
-              type="email"
+              type=""
               name="email"
-              value={formData.email}
+              value={formData.emergency_contact}
               onChange={handleChange}
               className="flex-1 p-2 bg-gray-700 text-white rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-              placeholder="Enter your email"
+              placeholder="Enter Phone nubmer"
               required
               disabled={otpSent}
             />
@@ -324,21 +325,6 @@ function RegisterForm() {
             onChange={handleChange}
             className="w-full p-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
             placeholder="Choose a username"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-purple-300 mb-2">
-            Emergency Contact
-          </label>
-          <input
-            type="text"
-            name="emergency_contact"
-            value={formData.emergency_contact}
-            onChange={handleChange}
-            className="w-full p-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-            placeholder="Enter emergency contact number"
             required
           />
         </div>
